@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add_Course</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--插件  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!--插件——动画  -->
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <!--插件——字体库  -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+    <!--插件——加载进度条  -->
+    <link rel="stylesheet" href="../static/css/plugins/nprogress/nprogress.css">
+
+    <!--插件——侧边栏导航  -->
+    <link rel="stylesheet" href="../static/css/plugins/metisMenu/metisMenu.css">
+
+    <!--自定义  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div style="text-align: center">
+                    <h1>Change Attendance</h1>
+                    <br>
+                    <br>
+                </div>
+                <form class="form-horizontal m-t" id="courseForm" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input name="id" value="{{ stu.student_id }}" style="display: none">
+                        <label class="col-sm-4 control-label">Student ID: </label>
+                        <div class="col-sm-4">
+                            <input id="course_code" name="student_id" value="{{ stu.student_id }}"class="form-control" type="text" placeholder="id" disabled>
+{#                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 这里写点提示的内容</span>#}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">student username: </label>
+                        <div class="col-sm-4">
+                            <input id="course_name" name="username" value="{{ stu.user.username }}"class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid" placeholder="course name" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Attendance: </label>
+                        <div class="col-sm-4">
+                            <input id="course_name" name="attendance" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid" placeholder="please input attendance that you want to change">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-6 col-sm-offset-8">
+                            <button class="btn btn-primary" type="submit">Change</button>
+                        </div>
+                    </div>
+                </form>
+                <div><h2>{{ message }}</h2></div>
+            </div>
+        </div>
+    </div>
+ <!--插件-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="/static/jquery.form1.js"></script>
+    <script>
+        $(function (){
+            $("#courseForm").ajaxForm(
+                function (data){
+                    if (data === 'ok'){
+                        alert("Attendance has changed")
+                    }
+                }
+            )
+        })
+    </script>
+
+    <!--插件——侧边栏导航  -->
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!--插件——加载进度条  -->
+    <script src="../static/js/plugins/nprogress/nprogress.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--自定义JS  -->
+    <script src="../static/js/tab.js"></script>
+
+</body>
+
+</html>

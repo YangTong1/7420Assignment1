@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ceshi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--插件  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!--插件——动画  -->
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <!--插件——字体库  -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+    <!--插件——加载进度条  -->
+    <link rel="stylesheet" href="../static/css/plugins/nprogress/nprogress.css">
+
+    <!--插件——侧边栏导航  -->
+    <link rel="stylesheet" href="../static/css/plugins/metisMenu/metisMenu.css">
+
+    <!--自定义  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body class="">
+    <ol class="breadcrumb">
+    </ol>
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="table" class="animated fadeInRight" data-row-style="rowStyle" data-mobile-responsive="true">
+                    <thead style="align-content: center">
+                        <tr>
+                            <th><h3>year</h3></th>
+                            <th><h3>semester</h3></th>
+                            <th><h3>course</h3></th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align: center">
+                        {% for s in mysemester %}
+                           <tr>
+                            <td>{{ s.year }}</td>
+                            <td>{{ s.semester }}</td>
+                            {% for c in s.course.all %}
+                                <td>{{ c.name }}</td>
+                                {% endfor %}
+                            <td><button onclick="window.location.href='{% url 'change_semester' %}?id={{ s.id }}'">Change Semester</button></td>
+                            <td><button onclick="deleteSemester({{ s.id }})">delete Semester</button></td>
+                           </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">新增</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">名称:</label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price" class="control-label">价格:</label>
+                                        <textarea class="form-control" id="price"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button id="ok" type="button" class="btn btn-primary">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--插件-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <script>
+        function deleteSemester(id){
+            if(confirm('delete the semester that you choose?')){
+                window.location.href="{% url 'delete_semester' %}?did=" + id
+            }
+            else{
+                return false
+            }
+        }
+    </script>
+
+    <!--插件——侧边栏导航  -->
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!--插件——加载进度条  -->
+    <script src="../static/js/plugins/nprogress/nprogress.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--自定义JS  -->
+    <script src="../static/js/tab.js"></script>
+
+</body>
+
+</html>

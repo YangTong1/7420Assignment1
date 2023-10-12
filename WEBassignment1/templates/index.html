@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>Attendence System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%  load static %}
+    <!--插件  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!--插件——动画  -->
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <!--插件——字体库  -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+    <!--插件——加载进度条  -->
+    <link rel="stylesheet" href="../static/css/plugins/nprogress/nprogress.css">
+
+    <!--插件——侧边栏导航  -->
+    <link rel="stylesheet" href="../static/css/plugins/metisMenu/metisMenu.css">
+
+    <!--自定义  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <i id="sideClose" class="fa fa-bars fa-lg"></i>
+            <span class="logo-title">Attendence System</span>
+            <div class="pull-right user">
+                <span class="fa fa-user fa-lg"></span>
+                <span class="fa fa-angle-down fa-lg"></span>
+                <div class="user-info" style="display:none;">
+                    <div class="user-title">User</div>
+                    <button class="btn btn-default" onclick="window.location.href='{% url 'logout' %}'">logout</button>
+                </div>
+            </div>
+        </header>
+        <!--左侧导航-->
+        <nav class="navbar-default navbar-static-side">
+            <div class="sidebar-nav">
+                <ul class="metismenu" id="menu">
+                    <li class="active">
+                        <a class="has-arrow" href="javascript:;" aria-expanded="false">
+                            <span class="fa fa-fw fa-th-large"></span>
+                            <span class="menu-title">Course info</span>
+                        </a>
+                        <ul class="collapse" aria-expanded="true">
+                            <li><a href="{% url 'select_course' %}">Select Course</a></li>
+                            <li><a href="{% url 'add_course' %}">Add Course</a> </li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a class="has-arrow" href="javascript:;" aria-expanded="false">
+                            <span class="fa fa-fw fa-th-large"></span>
+                            <span class="menu-title">Lecturer Info</span>
+                        </a>
+                        <ul class="collapse" aria-expanded="true">
+                            <li><a href="{% url 'select_lecturer' %}">Select Lecturer</a></li>
+                            <li><a href="{% url 'add_lecturer' %}">Add Lecturer</a> </li>
+                            <li><a href="{% url 'lecturer_class' %}">Assign</a></li>
+                            <li><a href="{% url 'upload_file' %}">Upload Attendance</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a class="has-arrow" href="javascript:;" aria-expanded="false">
+                            <span class="fa fa-fw fa-th-large"></span>
+                            <span class="menu-title">Semester Info</span>
+                        </a>
+                        <ul class="collapse" aria-expanded="true">
+                            <li><a href="{% url 'select_semester' %}">Select Semester</a></li>
+                            <li><a href="{% url 'add_semester' %}">Add Semester</a> </li>
+                        </ul>
+                    </li>
+
+                      <li class="active">
+                        <a class="has-arrow" href="javascript:;" aria-expanded="false">
+                            <span class="fa fa-fw fa-th-large"></span>
+                            <span class="menu-title">Student Info</span>
+                        </a>
+                        <ul class="collapse" aria-expanded="true">
+                            <li><a href="{% url 'select_student' %}">Select Student</a></li>
+                            <li><a href="{% url 'add_student' %}">Add Student</a> </li>
+                            <li><a href="{% url 'stu_class' %}">Enroll</a> </li>
+                        </ul>
+                    </li>
+
+                     <li class="active">
+                        <a class="has-arrow" href="javascript:;" aria-expanded="false">
+                            <span class="fa fa-fw fa-th-large"></span>
+                            <span class="menu-title">Class Info</span>
+                        </a>
+                        <ul class="collapse" aria-expanded="true">
+                            <li><a href="{% url 'select_class' %}">Select Class</a></li>
+                            <li><a href="{% url 'add_Class' %}">Add Class</a> </li>
+                        </ul>
+                    </li>
+
+                     <li class="active">
+                        <a class="has-arrow" href="javascript:;" aria-expanded="false">
+                            <span class="fa fa-fw fa-th-large"></span>
+                            <span class="menu-title">College Day Info</span>
+                        </a>
+                        <ul class="collapse" aria-expanded="true">
+                            <li><a href="{% url 'add_collegeDay' %}">Add College Day</a> </li>
+                        </ul>
+                    </li>
+
+                       <li class="active">
+                        <a class="has-arrow" href="javascript:;" aria-expanded="false">
+                            <span class="fa fa-fw fa-th-large"></span>
+                            <span class="menu-title">User Info</span>
+                        </a>
+                        <ul class="collapse" aria-expanded="true">
+                            <li><a href="{% url 'select_user' %}">Select User</a></li>
+                            <li><a href="{% url 'add_user' %}">Add User</a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--右侧文本区-->
+        <div class="wrapper-page">
+
+            <!--tab-->
+            <button id="scrollTabLeft" class="btn btn-default btn-left">
+                    <span class="glyphicon glyphicon-backward"></span>
+                </button>
+            <div class="content-tabs">
+                <nav class="page-tabs menuTabs">
+                    <div class="page-tabs-content">
+{#                        <a href="javascript:;" class="menuTab active" data-id="tableBasic.html">基础表格</a>#}
+{#                        <a href="javascript:;" class="menuTab" data-id="tableFixed.html">固定表头#}
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <button id="scrollTabRight" class="btn btn-default pull-right btn-right">
+                    <span class="glyphicon glyphicon-forward"></span>
+                </button>
+            <div class="dropdown">
+                <a id="dLabel" class="btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    tab operation
+    <span class="caret"></span>
+  </a>
+                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li class="tabFresh">Current page refresh</li>
+                    <li class="tabCloseOther">Close all pages exclude this page</li>
+                    <li class="tabCloseAll">Close all pages</li>
+                </ul>
+            </div>
+            <!--iframe主体  -->
+            <div class="content" id="content">
+                <iframe id="iframe" class="iframe" width="100%" height="100%" src="{% url 'welcome' %}"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!--插件-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <!--插件——侧边栏导航  -->
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!--插件——加载进度条  -->
+    <script src="../static/js/plugins/nprogress/nprogress.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--自定义JS  -->
+    <script src="../static/js/tab.js"></script>
+
+    <script>
+        $(function() {
+            //调用侧边栏插件
+            $("#menu").metisMenu();
+            $('.sidebar-nav').slimScroll({
+                height: '100%',
+                railOpacity: 0.9,
+                alwaysVisible: false
+            });
+            $(".user").hover(function() {
+                $('.user-info').toggle().addClass('animated fadeIn');
+            });
+            //首页加载
+            NProgress.start();
+            setTimeout(function() {
+                    NProgress.done();
+                }, 1000)
+                //左侧导航条收缩
+            $('#sideClose').on('click', function() {
+                if ($('.navbar-default').hasClass('side-close')) {
+                    $('.navbar-default').removeClass('side-close');
+                } else {
+                    $('.navbar-default').addClass('side-close');
+                }
+                if ($('.wrapper-page').hasClass('page-close')) {
+                    $('.wrapper-page').removeClass('page-close');
+                } else {
+                    $('.wrapper-page').addClass('page-close');
+                }
+                $('.metismenu li').each(function() {
+                    if ($(this).hasClass('active')) {
+                        $(this).children('.has-arrow').removeClass('active1');
+                        $(this).children('.collapse').removeClass('in').attr('aria-expanded', 'false');
+                        if ($(this).children('.collapse').children('li').hasClass('active')) {
+                            $(this).children('.collapse').children('li').removeClass('active');
+                            $(this).children('.collapse').children('li').children('.has-arrow').removeClass('active1');
+                            $(this).children('.collapse').children('li').children('.collapse').removeClass('in').attr('aria-expanded', 'false');
+                        }
+                    }
+                });
+            });
+            //侧边栏
+            $(".metismenu li a").on("click", function() {
+                $(".metismenu li a").removeClass('active1');
+                $(this).addClass("active1");
+                return false;
+            });
+
+        });
+    </script>
+</body>
+
+</html>

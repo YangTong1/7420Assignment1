@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ceshi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--插件  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!--插件——动画  -->
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <!--插件——字体库  -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+    <!--插件——加载进度条  -->
+    <link rel="stylesheet" href="../static/css/plugins/nprogress/nprogress.css">
+
+    <!--插件——侧边栏导航  -->
+    <link rel="stylesheet" href="../static/css/plugins/metisMenu/metisMenu.css">
+
+    <!--自定义  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body class="">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="table" class="animated fadeInRight" data-row-style="rowStyle" data-mobile-responsive="true">
+                  <thead style="text-align: center">
+                    <tr>
+                        <th>staff id</th>
+                        <th>date of birth</th>
+                        <th>username</th>
+                        <th>first name</th>
+                        <th>last name</th>
+                    </tr>
+                  </thead>
+                    <tr>
+                        {% for l in mylecturer %}
+                           <tr>
+                               <td>{{ l.staff_id }}</td>
+                               <td>{{ l.DOB }}</td>
+                               <td>{{ l.user.username }}</td>
+                               <td>{{ l.user.first_name }}</td>
+                               <td>{{ l.user.last_name }}</td>
+                            <th><button onclick="window.location.href='{% url 'change_lecturer' %}?cid={{ l.staff_id }}'">change</button></th>
+                            <th><button onclick="deleteLecturer({{ l.staff_id }})">delete</button></th>
+                           </tr>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+<!--插件-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <script>
+        function deleteLecturer(id){
+            if(confirm("delete the lecturer that you choose?")){
+                window.location.href="{% url 'delete_lecturer' %}?did=" + id
+            }
+            else {
+                return false
+            }
+        }
+    </script>
+
+    <!--插件——侧边栏导航  -->
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!--插件——加载进度条  -->
+    <script src="../static/js/plugins/nprogress/nprogress.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--自定义JS  -->
+    <script src="../static/js/tab.js"></script>
+
+
+</body>
+
+</html>

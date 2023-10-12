@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Send</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--插件  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!--插件——动画  -->
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <!--插件——字体库  -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+    <!--插件——加载进度条  -->
+    <link rel="stylesheet" href="../static/css/plugins/nprogress/nprogress.css">
+
+    <!--插件——侧边栏导航  -->
+    <link rel="stylesheet" href="../static/css/plugins/metisMenu/metisMenu.css">
+
+    <!--自定义  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="content">
+        <form id="send_email" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="col-sm-4">Subject: <input type="text" name="subject"></label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4">To: <input type="text" name="to" value="{{ stu.user.email }}"></label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-12">Content: <textarea name="content" class="form-control" placeholder="input your content here"></textarea></label>
+            </div>
+
+            <div class="form-group">
+                <br>
+                <br>
+                <br>
+                <input type="submit" value="send">
+            </div>
+
+        </form>
+    </div>
+ <!--插件-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="/static/jquery.form1.js"></script>
+    <script>
+        $(function (){
+            $("#courseForm").ajaxForm(
+                function (data){
+                    if (data === 'ok'){
+                        alert("Course Added Successfully")
+                    }
+                }
+            )
+        })
+    </script>
+
+    <!--插件——侧边栏导航  -->
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!--插件——加载进度条  -->
+    <script src="../static/js/plugins/nprogress/nprogress.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--自定义JS  -->
+    <script src="../static/js/tab.js"></script>
+</body>
+
+</html>

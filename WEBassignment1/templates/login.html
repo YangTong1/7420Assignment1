@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--插件  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!--插件——动画  -->
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <!--插件——字体库  -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+    <!--插件——加载进度条  -->
+    <link rel="stylesheet" href="../static/css/plugins/nprogress/nprogress.css">
+
+    <!--插件——侧边栏导航  -->
+    <link rel="stylesheet" href="../static/css/plugins/metisMenu/metisMenu.css">
+
+    <!--自定义  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12" style="margin-top: 100px">
+                <div style="text-align: center">
+                    <h1>Login</h1>
+                    <br>
+                    <br>
+                </div>
+                <form class="form-horizontal m-t" id="login_Form" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Username:</label>
+                        <div class="col-sm-5">
+                            <input name="username" class="form-control" type="text" placeholder="username">
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-sm-4 control-label">password:</label>
+                        <div class="col-sm-5">
+                            <input name="password" class="form-control" type="text" aria-required="true" aria-invalid="false" placeholder="password">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                        <div style="text-align: center">
+                            <button class="btn btn-primary" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ <!--插件-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.form.js"></script>
+    <!--插件——侧边栏导航  -->
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!--插件——加载进度条  -->
+    <script src="../static/js/plugins/nprogress/nprogress.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--自定义JS  -->
+    <script src="../static/js/tab.js"></script>
+    <script>
+        $(function () {
+            $('#login_Form').ajaxForm(
+                function (data) {
+                    if (data === 'error') {
+                        alert("Uncorrect!")
+                    }
+                    else if(data === 'ok') {
+                        window.location.href={% url 'index' %}
+                    }
+                }
+                );
+
+        });
+
+
+
+    </script>
+</body>
+
+</html>

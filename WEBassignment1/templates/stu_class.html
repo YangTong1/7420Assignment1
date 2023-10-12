@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Select Student</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--插件  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!--插件——动画  -->
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <!--插件——字体库  -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+    <!--插件——加载进度条  -->
+    <link rel="stylesheet" href="../static/css/plugins/nprogress/nprogress.css">
+
+    <!--插件——侧边栏导航  -->
+    <link rel="stylesheet" href="../static/css/plugins/metisMenu/metisMenu.css">
+
+    <!--自定义  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body class="">
+    <ol class="breadcrumb">
+        <li>表格控件</li>
+        <li class="active">基本表格</li>
+    </ol>
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <table id="table" class="animated fadeInRight" data-row-style="rowStyle" data-mobile-responsive="true">
+                                    <thead style="text-align: center" >
+                                    <tr>
+                                        <th style="margin-right: 10px">stu_id</th>
+                                        <th>Fname</th>
+                                        <th>Lname</th>
+                                        <th>username</th>
+                                        <th>myclass</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for s in stu %}
+                                    <tr>
+                                        <td>{{ s.student_id }}</td>
+                                        <td>{{ s.user.first_name }}</td>
+                                        <td>{{ s.user.last_name }}</td>
+                                        <td>{{ s.user.username }}</td>
+                                        {% for c in s.myclass.all %}
+                                            <td>{{ c.number }}</td>
+                                        {% endfor %}
+                                        <td><button onclick="window.location.href='{% url 'enroll' %}?id={{ s.student_id }}'">Enroll</button></td>
+                                        {#                                        <td><button onclick="deleteCourse({{ c.id }})">Delete_Course</button></td>#}
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                </table>
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">新增</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">名称:</label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price" class="control-label">价格:</label>
+                                        <textarea class="form-control" id="price"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button id="ok" type="button" class="btn btn-primary">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<!--插件-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <!--插件——侧边栏导航  -->
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!--插件——加载进度条  -->
+    <script src="../static/js/plugins/nprogress/nprogress.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--自定义JS  -->
+    <script src="../static/js/tab.js"></script>
+<script>
+
+</script>
+
+</body>
+
+</html>

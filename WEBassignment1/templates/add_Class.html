@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add_Course</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--插件  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!--插件——动画  -->
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <!--插件——字体库  -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+    <!--插件——加载进度条  -->
+    <link rel="stylesheet" href="../static/css/plugins/nprogress/nprogress.css">
+
+    <!--插件——侧边栏导航  -->
+    <link rel="stylesheet" href="../static/css/plugins/metisMenu/metisMenu.css">
+
+    <!--自定义  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div style="text-align: center">
+                    <h1>Add Class</h1>
+                    <br>
+                    <br>
+                </div>
+                <form class="form-horizontal m-t" id="addStudentForm" method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Number: </label>
+                        <div class="col-sm-4">
+                            <input id="course_code" name="number" class="form-control" type="text" placeholder="number">
+{#                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 这里写点提示的内容</span>#}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Course: </label>
+                        <div class="col-sm-4">
+                            <input id="course_name" name="course" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid" placeholder="course name">
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label class="col-sm-4 control-label">Lecturer: </label>
+                        <div class="col-sm-4">
+                            <input id="course_name" name="lecturer" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid" placeholder="lecturer ID">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Semester: </label>
+                        <div class="col-sm-4">
+                            <input id="course_name" name="semester" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid" placeholder="semester">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Student: </label>
+                        <div class="col-sm-4">
+                            <input id="course_name" name="student" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid" placeholder="please use comma to split each student ID">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-6 col-sm-offset-8">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                        </div>
+                    </div>
+                </form>
+                <div><h2>{{ message }}</h2></div>
+            </div>
+        </div>
+    </div>
+ <!--插件-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="/static/jquery.form1.js"></script>
+    <script>
+        $(function (){
+            $("#addStudentForm").ajaxForm(
+                function (data){
+                    if(data ==="ok"){
+                        alert("Add Successfully")
+                    }
+                    else {
+                        alert(("something wrong"))
+                    }
+                }
+            )
+        })
+    </script>
+
+    <!--插件——侧边栏导航  -->
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!--插件——加载进度条  -->
+    <script src="../static/js/plugins/nprogress/nprogress.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--自定义JS  -->
+    <script src="../static/js/tab.js"></script>
+    <script>
+        $.validator.setDefaults({
+            highlight: function(element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function(element) {
+                element.closest('.form-group').removeClass('has-error').addClass('has-success');
+            },
+            errorElement: "span",
+            errorPlacement: function(error, element) {
+                if (element.is(":radio") || element.is(":checkbox")) {
+                    error.appendTo(element.parent().parent().parent());
+                } else {
+                    error.appendTo(element.parent());
+                }
+            },
+            errorClass: "help-block m-b-none",
+            validClass: "help-block m-b-none"
+        });
+        $(function() {
+            var icon = "<i class='fa fa-times-circle'></i> ";
+            $("#signupForm").validate({
+                rules: {
+                    firstname: "required",
+                    lastname: "required",
+                    username: {
+                        required: true,
+                        minlength: 2
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    },
+                    confirm_password: {
+                        required: true,
+                        minlength: 5,
+                        equalTo: "#password"
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    topic: {
+                        required: "#newsletter:checked",
+                        minlength: 2
+                    },
+                    agree: "required"
+                },
+                messages: {
+                    firstname: icon + "请输入你的姓",
+                    lastname: icon + "请输入您的名字",
+                    username: {
+                        required: icon + "请输入您的用户名",
+                        minlength: icon + "用户名必须两个字符以上"
+                    },
+                    password: {
+                        required: icon + "请输入您的密码",
+                        minlength: icon + "密码必须5个字符以上"
+                    },
+                    confirm_password: {
+                        required: icon + "请再次输入密码",
+                        minlength: icon + "密码必须5个字符以上",
+                        equalTo: icon + "两次输入的密码不一致"
+                    },
+                    email: icon + "请输入您的E-mail",
+                    agree: {
+                        required: icon + "必须同意协议后才能注册",
+                        element: '#agree-error'
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

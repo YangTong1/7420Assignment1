@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>select user</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--插件  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <!--插件——动画  -->
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <!--插件——字体库  -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+    <!--插件——加载进度条  -->
+    <link rel="stylesheet" href="../static/css/plugins/nprogress/nprogress.css">
+
+    <!--插件——侧边栏导航  -->
+    <link rel="stylesheet" href="../static/css/plugins/metisMenu/metisMenu.css">
+
+    <!--自定义  -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body class="">
+    <ol class="breadcrumb">
+    </ol>
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <table>
+                   <thead style="text-align: center">
+                    <tr>
+                        <th>username</th>
+                        <th>group</th>
+                        <th>email</th>
+                        <th>first name</th>
+                        <th>last name</th>
+                        <th>address</th>
+                        <th>tel</th>
+                    </tr>
+                   </thead>
+                    <tr>
+                        {% for u in users %}
+                           <tr>
+                               <td>{{ u.user.username }}</td>
+                               <td>{{ u.user.groups.all.0 }}</td>
+                               <td>{{ u.user.email}}</td>
+                               <td>{{ u.user.first_name }}</td>
+                               <td>{{ u.user.last_name }}</td>
+                               <td>{{ u.address }}</td>
+                               <td>{{ u.telephone }}</td>
+                            <th><button onclick="window.location.href='{% url 'change_user' %}?username={{ u.user.username }}'">change user</button></th>
+                            <th><button onclick="deleteUser('{{ u.user.username }}')">delete</button></th>
+                           </tr>
+                        {% endfor %}
+                    </tr>
+                </table>
+
+
+                <table id="table" class="animated fadeInRight" data-row-style="rowStyle" data-mobile-responsive="true">
+                </table>
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">新增</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">名称:</label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price" class="control-label">价格:</label>
+                                        <textarea class="form-control" id="price"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button id="ok" type="button" class="btn btn-primary">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--插件-->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <script>
+        function deleteUser(username1){
+            if(confirm("delete the user that you choose?")){
+                window.location.href="{% url 'delete_user' %}?username1=" + username1
+            }
+            else {
+                return false
+            }
+        }
+    </script>
+
+    <!--插件——侧边栏导航  -->
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!--插件——加载进度条  -->
+    <script src="../static/js/plugins/nprogress/nprogress.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--自定义JS  -->
+    <script src="../static/js/tab.js"></script>
+
+
+</body>
+
+</html>
